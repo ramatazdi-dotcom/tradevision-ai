@@ -186,7 +186,25 @@ const App = () => {
         <div className="max-w-5xl mx-auto px-4 py-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <div className="bg-gradient-to-br from-blue-600 to-indigo-600 p-2 rounded-lg shadow-lg shadow-blue-900/20">
-              <TrendingUp size={24} className="text-white" />
+              {/* Logo Baru TradeVision AI */}
+              <svg 
+                width="32" 
+                height="32" 
+                viewBox="0 0 24 24" 
+                fill="none" 
+                stroke="currentColor" 
+                strokeWidth="2" 
+                strokeLinecap="round" 
+                strokeLinejoin="round" 
+                className="text-white"
+              >
+                {/* Bagian Mata (Vision) */}
+                <path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z" />
+                <circle cx="12" cy="12" r="3" />
+  
+                {/* Bagian Chart (Trade) - Panah Naik Petir */}
+                <path d="M12 12 L16 8 L16 11 L20 7" stroke="cyan" strokeWidth="2.5" />
+              </svg>
             </div>
             <div>
               <div className="flex items-center gap-2">
