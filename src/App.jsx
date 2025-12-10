@@ -463,7 +463,7 @@ const ChartAnalyzer = ({ onBack }) => {
       </main>
       
       <footer className="mt-12 py-6 text-center text-slate-500 text-xs border-t border-slate-800 px-4">
-        <p>© 2025 TradeVision AI. Powered by Google Gemini.</p>
+        <p>© 2025 TradeVision AI. Powered by RAMATAZDI.</p>
         <div className="mt-3 max-w-2xl mx-auto p-3 bg-slate-800/50 rounded-lg border border-slate-700/50">
           <p className="text-slate-400 font-medium">Disclaimer</p>
           <p className="mt-1 text-slate-500 leading-relaxed">Aplikasi ini hanya alat bantu. Keputusan trading dan risiko ada di tangan Anda.</p>
