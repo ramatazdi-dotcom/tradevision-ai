@@ -2,13 +2,114 @@ import React, { useState, useRef } from 'react';
 import { 
   Upload, Camera, TrendingUp, TrendingDown, Minus, AlertTriangle, 
   X, Loader2, Key, Layers, CheckSquare, Square, Info, 
-  ArrowRight, BarChart3, ShieldCheck, Zap, ChevronLeft, Target, Ban, LogIn, Users
+  ArrowRight, BarChart3, ShieldCheck, Zap, ChevronLeft, Target, Ban, LogIn, Users, BookOpen, HelpCircle
 } from 'lucide-react';
 
 // ==========================================
-// BAGIAN 1: LANDING PAGE
+// BAGIAN 1: PANDUAN PENGGUNA (Halaman Baru)
 // ==========================================
-const LandingPage = ({ onStart }) => {
+const UserGuide = ({ onBack }) => {
+  return (
+    <div className="min-h-screen bg-slate-900 text-slate-100 font-sans selection:bg-blue-500 selection:text-white p-4 md:p-8">
+      <div className="max-w-4xl mx-auto">
+        <button onClick={onBack} className="mb-6 flex items-center gap-2 text-slate-400 hover:text-white transition-colors group">
+          <ChevronLeft size={20} className="group-hover:-translate-x-1 transition-transform" /> Kembali ke Menu
+        </button>
+        
+        <div className="bg-slate-800 rounded-2xl border border-slate-700 shadow-2xl overflow-hidden">
+          {/* Header Panduan */}
+          <div className="bg-slate-900/50 p-8 border-b border-slate-700">
+            <h1 className="text-3xl font-bold text-white flex items-center gap-3">
+              <BookOpen className="text-blue-400" size={32} />
+              Panduan Pengguna TradeVision AI
+            </h1>
+            <p className="text-slate-400 mt-2 text-lg">Cara menggunakan asisten trading AI untuk teknikal dan bandarmology.</p>
+          </div>
+
+          <div className="p-8 space-y-10">
+            {/* Step 1 */}
+            <section className="flex gap-4 md:gap-6">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold text-lg border border-blue-500/50">1</div>
+              <div className="space-y-3">
+                <h2 className="text-xl font-bold text-white">Persiapan Awal</h2>
+                <ul className="list-disc pl-5 space-y-2 text-slate-300 leading-relaxed">
+                  <li>Klik tombol <span className="bg-slate-700 px-2 py-0.5 rounded text-white text-xs">Set API Key</span> di pojok kanan atas aplikasi.</li>
+                  <li>Masukkan <strong>Google Gemini API Key</strong> Anda (Dapatkan gratis di Google AI Studio).</li>
+                  <li>Jika belum punya API Key, Anda bisa mencentang kotak <strong>"Mode Demo"</strong> untuk mencoba simulasi.</li>
+                </ul>
+              </div>
+            </section>
+
+            {/* Step 2 */}
+            <section className="flex gap-4 md:gap-6">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold text-lg border border-purple-500/50">2</div>
+              <div className="space-y-4 w-full">
+                <h2 className="text-xl font-bold text-white">Pilih Mode Analisa</h2>
+                <div className="grid md:grid-cols-2 gap-4">
+                  <div className="bg-slate-900 p-4 rounded-xl border border-slate-700">
+                    <h3 className="font-bold text-white flex items-center gap-2 mb-2"><TrendingUp size={16} className="text-blue-400"/> Mode Teknikal (Global)</h3>
+                    <p className="text-sm text-slate-400">Cocok untuk Crypto, Forex, atau Saham US. Biarkan toggle "Analisa Saham Indonesia" mati. Hanya perlu upload Chart.</p>
+                  </div>
+                  <div className="bg-slate-900 p-4 rounded-xl border border-slate-700">
+                    <h3 className="font-bold text-white flex items-center gap-2 mb-2"><Users size={16} className="text-emerald-400"/> Mode Bandarmology (IDX)</h3>
+                    <p className="text-sm text-slate-400">Khusus saham Indonesia. Aktifkan toggle hingga hijau. Anda perlu upload <strong>Chart</strong> DAN <strong>Broker Summary</strong>.</p>
+                  </div>
+                </div>
+              </div>
+            </section>
+
+            {/* Step 3 */}
+            <section className="flex gap-4 md:gap-6">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold text-lg border border-emerald-500/50">3</div>
+              <div className="space-y-3">
+                <h2 className="text-xl font-bold text-white">Upload & Analisa</h2>
+                <ul className="list-disc pl-5 space-y-2 text-slate-300 leading-relaxed">
+                  <li>Pastikan screenshot chart terlihat jelas (Candle & Harga).</li>
+                  <li>Pilih indikator tambahan seperti <strong>SMC</strong> atau <strong>EMA</strong> di panel preferensi.</li>
+                  <li>Klik tombol besar <strong>Mulai Analisa</strong> dan tunggu hasil AI dalam hitungan detik.</li>
+                </ul>
+              </div>
+            </section>
+
+            {/* Step 4 */}
+            <section className="flex gap-4 md:gap-6">
+              <div className="flex-shrink-0 w-10 h-10 rounded-full bg-orange-500/20 text-orange-400 flex items-center justify-center font-bold text-lg border border-orange-500/50">4</div>
+              <div className="space-y-3">
+                <h2 className="text-xl font-bold text-white">Membaca Hasil (Trading Plan)</h2>
+                <p className="text-slate-300">AI akan memberikan rencana trading lengkap:</p>
+                <div className="grid grid-cols-3 gap-2 mt-2">
+                  <div className="bg-blue-900/20 border border-blue-500/30 p-2 rounded text-center">
+                    <div className="text-xs text-blue-300 font-bold mb-1">ENTRY</div>
+                    <div className="text-[10px] text-slate-400">Area Masuk</div>
+                  </div>
+                  <div className="bg-rose-900/20 border border-rose-500/30 p-2 rounded text-center">
+                    <div className="text-xs text-rose-300 font-bold mb-1">STOP LOSS</div>
+                    <div className="text-[10px] text-slate-400">Batas Rugi</div>
+                  </div>
+                  <div className="bg-emerald-900/20 border border-emerald-500/30 p-2 rounded text-center">
+                    <div className="text-xs text-emerald-300 font-bold mb-1">TAKE PROFIT</div>
+                    <div className="text-[10px] text-slate-400">Target Cuan</div>
+                  </div>
+                </div>
+              </div>
+            </section>
+          </div>
+          
+          <div className="bg-slate-900/30 p-6 border-t border-slate-700 text-center">
+            <button onClick={onBack} className="bg-blue-600 hover:bg-blue-500 text-white px-8 py-3 rounded-xl font-bold transition-all shadow-lg shadow-blue-500/20">
+              Saya Mengerti, Mulai Trading Sekarang
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// ==========================================
+// BAGIAN 2: LANDING PAGE (Updated)
+// ==========================================
+const LandingPage = ({ onStart, onGuide }) => {
   return (
     <div className="min-h-screen bg-slate-900 text-slate-100 font-sans selection:bg-blue-500 selection:text-white">
       <nav className="max-w-6xl mx-auto px-6 py-6 flex justify-between items-center">
@@ -20,9 +121,14 @@ const LandingPage = ({ onStart }) => {
           </svg>
           <span className="text-xl font-bold tracking-tight">TradeVision AI</span>
         </div>
-        <button onClick={onStart} className="text-sm font-medium text-slate-300 hover:text-white transition-colors border border-slate-700 hover:border-slate-500 px-4 py-2 rounded-full">
-          Masuk Aplikasi
-        </button>
+        <div className="flex gap-3">
+          <button onClick={onGuide} className="text-sm font-medium text-slate-400 hover:text-white transition-colors flex items-center gap-1">
+            <HelpCircle size={16} /> Panduan
+          </button>
+          <button onClick={onStart} className="text-sm font-medium text-white bg-slate-800 hover:bg-slate-700 transition-colors border border-slate-700 px-4 py-2 rounded-full">
+            Masuk Aplikasi
+          </button>
+        </div>
       </nav>
 
       <div className="max-w-4xl mx-auto px-6 pt-20 pb-32 text-center">
@@ -49,6 +155,9 @@ const LandingPage = ({ onStart }) => {
             Mulai Analisa Sekarang
             <ArrowRight size={20} className="group-hover:translate-x-1 transition-transform" />
           </button>
+          <button onClick={onGuide} className="px-8 py-4 bg-slate-800 hover:bg-slate-700 text-slate-300 font-medium rounded-xl border border-slate-700 transition-all flex items-center gap-2">
+            <BookOpen size={18} /> Baca Panduan
+          </button>
         </div>
       </div>
 
@@ -60,7 +169,7 @@ const LandingPage = ({ onStart }) => {
 };
 
 // ==========================================
-// BAGIAN 2: APP UTAMA (Logic Baru)
+// BAGIAN 3: APP UTAMA (Chart Analyzer Logic)
 // ==========================================
 const ChartAnalyzer = ({ onBack }) => {
   const [chartImage, setChartImage] = useState(null);
@@ -75,7 +184,6 @@ const ChartAnalyzer = ({ onBack }) => {
   const [error, setError] = useState('');
   const [isDemoMode, setIsDemoMode] = useState(false);
   
-  // State baru untuk mode IDX
   const [useBandarmology, setUseBandarmology] = useState(false);
   
   const [preferences, setPreferences] = useState({
@@ -89,7 +197,6 @@ const ChartAnalyzer = ({ onBack }) => {
 
   const togglePreference = (key) => setPreferences(prev => ({ ...prev, [key]: !prev[key] }));
 
-  // Handler Upload Chart
   const handleChartUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -103,7 +210,6 @@ const ChartAnalyzer = ({ onBack }) => {
     }
   };
 
-  // Handler Upload Broker Summary
   const handleBrokerUpload = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -117,13 +223,11 @@ const ChartAnalyzer = ({ onBack }) => {
     }
   };
 
-  // Fungsi Retry untuk Model Overloaded
   const fetchWithRetry = async (url, options, retries = 3, backoff = 2000) => {
     try {
       const response = await fetch(url, options);
       if (!response.ok) {
         const errData = await response.json().catch(() => ({}));
-        // Retry jika server sibuk (503) atau rate limit (429)
         if (retries > 0 && (response.status === 503 || response.status === 429)) {
            await new Promise(resolve => setTimeout(resolve, backoff));
            return fetchWithRetry(url, options, retries - 1, backoff * 1.5);
@@ -133,7 +237,6 @@ const ChartAnalyzer = ({ onBack }) => {
       const data = await response.json();
       return data;
     } catch (err) {
-      // Retry jika fetch gagal total (network error)
       if (retries > 0) {
          await new Promise(resolve => setTimeout(resolve, backoff));
          return fetchWithRetry(url, options, retries - 1, backoff * 1.5); 
@@ -177,7 +280,6 @@ const ChartAnalyzer = ({ onBack }) => {
     setLoading(true); setError(''); setResult(null);
 
     try {
-      // Konstruksi Prompt
       let systemPrompt = `
         Bertindaklah sebagai Analis Saham Profesional (Technical & Bandarmology Expert).
         Tugas: Analisis gambar yang diberikan untuk membuat Trading Plan presisi.
@@ -215,19 +317,15 @@ const ChartAnalyzer = ({ onBack }) => {
         }
       `;
 
-      // Menyiapkan Payload Gambar (Multimodal)
       const contentParts = [
         { text: systemPrompt },
         { inlineData: { mimeType: "image/jpeg", data: chartImage } }
       ];
 
-      // Jika mode bandarmology, masukkan gambar kedua
       if (useBandarmology && brokerImage) {
         contentParts.push({ inlineData: { mimeType: "image/jpeg", data: brokerImage } });
       }
 
-      // Menggunakan model Gemini 2.5 Flash Preview (Support Multimodal Lebih Baik)
-      // Jika quota habis, Anda bisa mengganti URL di bawah menjadi 'gemini-1.5-flash'
       const data = await fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -421,11 +519,18 @@ const ChartAnalyzer = ({ onBack }) => {
 };
 
 // ==========================================
-// BAGIAN 3: MAIN APP (Pengatur Halaman)
+// BAGIAN 4: MAIN APP (Pengatur Halaman)
 // ==========================================
 const App = () => {
-  const [currentView, setCurrentView] = useState('landing'); 
-  return <>{currentView === 'landing' ? <LandingPage onStart={() => setCurrentView('app')} /> : <ChartAnalyzer onBack={() => setCurrentView('landing')} />}</>;
+  const [currentView, setCurrentView] = useState('landing'); // 'landing', 'app', 'guide'
+
+  return (
+    <>
+      {currentView === 'landing' && <LandingPage onStart={() => setCurrentView('app')} onGuide={() => setCurrentView('guide')} />}
+      {currentView === 'app' && <ChartAnalyzer onBack={() => setCurrentView('landing')} />}
+      {currentView === 'guide' && <UserGuide onBack={() => setCurrentView('landing')} />}
+    </>
+  );
 };
 
 export default App;
