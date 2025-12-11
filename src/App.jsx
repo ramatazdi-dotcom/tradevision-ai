@@ -52,7 +52,7 @@ const UserGuide = ({ onBack }) => {
                   </div>
                   <div className="bg-slate-900 p-4 rounded-xl border border-slate-700">
                     <h3 className="font-bold text-white flex items-center gap-2 mb-2"><Users size={16} className="text-emerald-400"/> Mode Bandarmology (IDX)</h3>
-                    <p className="text-sm text-slate-400">Khusus saham Indonesia. Aktifkan toggle hingga hijau. Anda perlu upload <strong>Chart</strong> DAN <strong>Broker Summary</strong>.</p>
+                    <p className="text-sm text-slate-400">Khusus saham Indonesia. Aktifkan toggle hingga hijau. Anda perlu upload <strong>Chart</strong> DAN <strong>Broker Summary di Aplikasi Broker</strong>.</p>
                   </div>
                 </div>
               </div>
