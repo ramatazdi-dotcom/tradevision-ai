@@ -18,12 +18,16 @@ const LoginScreen = ({ onLogin }) => {
   const [error, setError] = useState('');
 
   const handleSubmit = (e) => {
-    e.preventDefault();git
-    if (input === APP_PASSWORD) {
+    e.preventDefault();
+    // Membersihkan spasi dan mengubah ke huruf kecil agar tidak sensitif case
+    const cleanInput = input.trim().toLowerCase();
+    const cleanPass = APP_PASSWORD.trim().toLowerCase();
+
+    if (cleanInput === cleanPass) {
       onLogin();
     } else {
-      setError('Password salah. Coba "cuan"');
-      setInput('');
+      setError('Password salah. Coba "cuan" (tanpa spasi)');
+      // Kita tidak mengosongkan input agar user bisa mengoreksi
     }
   };
 
@@ -37,16 +41,29 @@ const LoginScreen = ({ onLogin }) => {
         <p className="text-slate-400 mb-8 text-sm">Aplikasi terkunci. Masukkan password.</p>
         
         <form onSubmit={handleSubmit} className="space-y-4">
-          <input 
-            type="password" 
-            value={input}
-            onChange={(e) => { setInput(e.target.value); setError(''); }}
-            placeholder="Password..."
-            className="w-full bg-slate-900 border border-slate-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors"
-            autoFocus
-          />
-          {error && <div className="text-rose-400 text-xs flex items-center justify-center gap-1 animate-in fade-in"><AlertTriangle size={12} /> {error}</div>}
-          <button type="submit" className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-500/20 active:scale-95">Buka Kunci</button>
+          <div className="relative">
+            <input 
+              type="password" 
+              value={input}
+              onChange={(e) => { setInput(e.target.value); setError(''); }}
+              placeholder="Password..."
+              className="w-full bg-slate-900 border border-slate-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:border-blue-500 transition-colors placeholder:text-slate-600"
+              autoFocus
+            />
+          </div>
+          
+          {error && (
+            <div className="text-rose-400 text-xs flex items-center justify-center gap-1 animate-in fade-in slide-in-from-top-1 bg-rose-900/20 py-2 rounded-lg border border-rose-500/20">
+              <AlertTriangle size={12} /> {error}
+            </div>
+          )}
+
+          <button 
+            type="submit" 
+            className="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-3 rounded-xl transition-all shadow-lg shadow-blue-500/20 active:scale-95 flex items-center justify-center"
+          >
+            Buka Kunci
+          </button>
         </form>
       </div>
     </div>
@@ -214,7 +231,7 @@ const ChartAnalyzer = ({ onBack }) => {
       const contentParts = [{ text: systemPrompt }, { inlineData: { mimeType: "image/jpeg", data: chartImage } }];
       if (useBandarmology && brokerImage) { contentParts.push({ inlineData: { mimeType: "image/jpeg", data: brokerImage } }); }
 
-      // FIX: Pake model 2.5 Flash Preview (Sesuai request user & environment support)
+      // MODEL YANG DIGUNAKAN: gemini-2.5-flash-preview (Sesuai request agar tidak error not found)
       const data = await fetchWithRetry(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
